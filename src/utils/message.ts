@@ -9,8 +9,9 @@ export const getReadyForQAMessage = ({
 }): string => {
   const userMentions = otherUsers.map(user => `<@${user}>`).join(' ');
   return `:rotating_light:  Card pronto para homologação! :rotating_light:
-
+  
 Fala <@${mainUser}>! :eggplant:
+
 O card ${cardTitle} está pronto para ser homologado. :hammer_and_wrench:
 
 Por favor, confira o que foi implementado e, caso tudo esteja certo, mova o card para "Ready to Prod".
