@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { LinearWebhookBody } from '../types/linear';
 import { SlackService } from '../services/slack.service';
 import { Logger } from '../utils/logger';
+import { getReadyForQAMessage } from '../utils/message';
 
 export class LinearController {
   private slackService: SlackService;
@@ -15,18 +16,21 @@ export class LinearController {
       const signature = req.headers['linear-signature'];
 
       if (req.body.type === 'Issue') {
-        // Log the webhook data
-        Logger.logWebhook(
-          req.body.data.identifier,
-          req.body.webhookTimestamp,
-          req.body
-        );
+        if (process.env.LOG_WEBHOOK === 'TRUE') {
+          Logger.logWebhook(
+            req.body.data.identifier,
+            req.body.webhookTimestamp,
+            req.body
+          );
+        }
 
-        // Notify Slack about the issue update
+        const message = getReadyForQAMessage({
+          mainUser: 'U08TYNR21FG',
+          cardTitle: req.body.data.title,
+          otherUsers: ['U08UF7012SV'],
+        });
         await this.slackService.notifyIssueUpdate(
-          req.body.data.url,
-          req.body.data.title,
-          req.body.data.state.name
+          message
         );
       }
 
