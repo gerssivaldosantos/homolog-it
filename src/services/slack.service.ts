@@ -25,6 +25,6 @@ export class SlackService {
 
   async notifyIssueUpdate(issueUrl: string, issueTitle: string, stateName: string): Promise<void> {
     const message = `Issue <${issueUrl}|${issueTitle}> moved to "${stateName}" :eggplant:`;
-    await this.publishMessage(config.slack.defaultChannel, message);
+    await this.publishMessage(config.slack.defaultChannel || '', message);
   }
 } 

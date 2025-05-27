@@ -6,7 +6,7 @@ export const config = {
   port: process.env.PORT || 3000,
   slack: {
     token: process.env.SLACK_TOKEN,
-    defaultChannel: process.env.SLACK_DEFAULT_CHANNEL || 'C08TXTNUWG3',
+    defaultChannel: process.env.SLACK_DEFAULT_CHANNEL,
   },
   linear: {
     webhookSecret: process.env.LINEAR_WEBHOOK_SECRET,
