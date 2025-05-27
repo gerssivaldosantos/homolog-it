@@ -11,5 +11,8 @@ COPY . ./
 # Install packages
 RUN npm ci
 
+# Build TypeScript
+RUN npm run build
+
 # Serve the app
 CMD ["npm", "run", "start"]
