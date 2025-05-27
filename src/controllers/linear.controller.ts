@@ -15,7 +15,7 @@ export class LinearController {
     try {
       const signature = req.headers['linear-signature'];
 
-      if (req.body.type === 'Issue') {
+      if (req.body.type === 'Issue' && req.body.data.state.name === 'In Homolog') {
         if (process.env.LOG_WEBHOOK === 'TRUE') {
           Logger.logWebhook(
             req.body.data.identifier,
@@ -25,9 +25,9 @@ export class LinearController {
         }
 
         const message = getReadyForQAMessage({
-          mainUser: 'U08TYNR21FG',
+          mainUser: process.env.MAIN_USER || '',
           cardTitle: req.body.data.title,
-          otherUsers: ['U08UF7012SV'],
+          otherUsers: process.env.OTHER_USERS?.split(',') || [],
         });
         await this.slackService.notifyIssueUpdate(
           message
