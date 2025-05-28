@@ -18,7 +18,10 @@ export const linearIssueDataSchema = z.object({
     identifier: z.string(),
     title: z.string(),
     url: z.string(),
-    webhookTimestamp: z.number().optional()
+    webhookTimestamp: z.number().optional(),
+    team: z.object({
+      key: z.string()
+    })
   })
 });
 

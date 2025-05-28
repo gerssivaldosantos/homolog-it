@@ -10,6 +10,7 @@ export const config = {
   },
   linear: {
     webhookSecret: process.env.LINEAR_WEBHOOK_SECRET,
+    teamKey: process.env.LINEAR_TEAM_KEY,
   },
   logging: {
     level: process.env.LOG_LEVEL || 'info',
