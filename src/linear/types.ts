@@ -62,4 +62,4 @@ export interface LinearWebhookBody {
   organizationId: string;
   webhookTimestamp: number;
   webhookId: string;
-} 
+}
