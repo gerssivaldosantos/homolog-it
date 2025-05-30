@@ -20,7 +20,9 @@ export const handleIssueUpdate = async (webhookBody: LinearWebhookSchema): Promi
       mainUser: process.env.MAIN_USER || '',
       cardTitle: webhookBody.data.title,
       cardUrl: webhookBody.data.url,
-      otherUsers: process.env.OTHER_USERS?.split(',') || [],
+      otherUsers: process.env.OTHER_USERS
+        ? process.env.OTHER_USERS.split(',').filter(Boolean)
+        : [],
     });
 
     await notifyIssueUpdate(message);

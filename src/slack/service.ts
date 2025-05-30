@@ -36,6 +36,7 @@ export const formatReadyForQAMessage = ({
   otherUsers: string[];
 }): string => {
   const userMentions = otherUsers.map(user => `<@${user}>`).join(' ');
+  const fyiSection = userMentions ? `\n\nFYI ${userMentions}` : '';
 
   return `Fala, <@${mainUser}>!
 
@@ -43,9 +44,7 @@ export const formatReadyForQAMessage = ({
 
 Verifique o que foi implementado e:
 -> Se estiver tudo certo, mova para *Ready to Prod*. :green_heart:
--> Se houver problemas, mova para *In Progress*. :large_yellow_circle:
-
-FYI ${userMentions}`;
+-> Se houver problemas, mova para *In Progress*. :large_yellow_circle:${fyiSection}`;
 };
 
 export const notifyIssueUpdate = async (message: string): Promise<void> => {
